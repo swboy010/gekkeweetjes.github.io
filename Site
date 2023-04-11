@@ -1,0 +1,74 @@
+from http.server import HTTPServer, BaseHTTPRequestHandler
+
+# Define the HTML content to be displayed on the webpage
+content = """
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Gekke Weetjes</title>
+	<style>
+		body {
+			background-color: #ffd700;
+			color: #800000;
+			font-family: Arial, sans-serif;
+		}
+		h1 {
+			color: #8b0000;
+			text-align: center;
+		}
+		.weetje {
+			margin-top: 50px;
+			padding: 20px;
+			background-color: #fff;
+			border-radius: 10px;
+			box-shadow: 0 0 10px rgba(0,0,0,0.3);
+		}
+	</style>
+</head>
+<body>
+	<h1>Gekke Weetjes</h1>
+	<div class="weetje">
+		<p>Wist je dat een groep flamingo's een flamboyance wordt genoemd?</p>
+	</div>
+	<div class="weetje">
+		<p>Wist je dat de kans dat je door de bliksem wordt getroffen groter is dan de kans om de loterij te winnen?</p>
+	</div>
+	<div class="weetje">
+		<p>Wist je dat de meeste lucht in een zak chips zit om de chips te beschermen tijdens transport?</p>
+	</div>
+	<div class="weetje">
+		<p>Wist je dat Coca-Cola oorspronkelijk groen was?</p>
+	</div>
+	<div class="weetje">
+		<p>Wist je dat er meer mogelijkheden zijn om een schaakspel te spelen dan er atomen zijn in het universum?</p>
+	</div>
+	<div class="weetje">
+		<p>Wist je dat een Octopus drie harten heeft?</p>
+	</div>
+</body>
+</html>
+"""
+
+# Define the HTTP request handler class
+class RequestHandler(BaseHTTPRequestHandler):
+	def do_GET(self):
+		# Send response status code
+		self.send_response(200)
+
+		# Send headers
+		self.send_header('Content-type','text/html')
+		self.end_headers()
+
+		# Write content as utf-8 data
+		self.wfile.write(bytes(content, "utf8"))
+
+# Define the server's listening address and port number
+server_address = ('', 7000)
+
+# Create the HTTP server
+httpd = HTTPServer(server_address, RequestHandler)
+
+# Start the HTTP server
+print("Server is running on port 7000...")
+httpd.serve_forever()
+

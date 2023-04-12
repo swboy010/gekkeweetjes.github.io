@@ -1,2 +1,2 @@
-# gekkeweetjes.github.io
+# gekkeweetjes-3.github.io
 Website met allemaal weetjes
